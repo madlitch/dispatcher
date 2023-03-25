@@ -8,8 +8,7 @@
 #define RESOURCE_PRINTERS 2
 #define RESOURCE_MODEMS 2
 
-// resources structure containing integers for each resource constraint and an
-// array of 1024 for the memory
+// structure containing available resources
 typedef struct {
     int printers;
     int cds;

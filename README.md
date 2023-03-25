@@ -19,5 +19,3 @@ Running the Dispatcher
 
 Make then run the `hostd` process with the dispatch list file as an argument.
 If no argument is supplied, it will use the default `dispatchlist` file.
-
-The `hostd process `
