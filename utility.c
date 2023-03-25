@@ -146,12 +146,6 @@ bool resources_available(process *proc, resources *available_res) {
         memory = available_res->available_memory - proc->mbytes;
     }
 
-//    if (cds >= 0 && modems >= 0 && printers >= 0 && scanners >= 0 && memory >= 0) {
-//        return true;
-//    } else {
-//        return false;
-//    }
-
     return cds >= 0 && modems >= 0 && printers >= 0 && scanners >= 0 && memory >= 0;
 }
 
