@@ -2,3 +2,4 @@
 /cmake-build-debug/
 *.o
 hostd
+sigtrap.c

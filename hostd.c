@@ -4,6 +4,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include <unistd.h>
+#include <signal.h>
 #include "queue.h"
 #include "utility.h"
 
@@ -64,6 +65,7 @@ int main(int argc, char *argv[]) {
     printf("starting dispatcher...\n");
     int proc_id = 1;
     int mem_index = 0;
+    pid_t pid;
 
     while (true) {
         // iterate through each item in the job dispatch list, add each process to the appropriate queues
@@ -93,10 +95,20 @@ int main(int argc, char *argv[]) {
         printf("allocating %d mbytes, %d printers, %d scanners, %d modems, %d cds\n", proc->mbytes, proc->printers,
                proc->scanners, proc->modems, proc->cds);
 
-        printf(" ---- executing process %d ---- \n", proc_id);
-        sleep(1);
+        // run mock process
+        pid = fork();
+        if (pid == 0) {
+            execl("./process", NULL, NULL);
+            perror(": ");
+        } else if (pid != 0) {
+            printf(" ---- executing process %d ---- \n", pid);
+            sleep(3);
+            kill(pid, SIGINT);
+            waitpid(pid, 0, 0);
+        }
 
         free_memory(available_resources, mem_index, proc->mbytes);
+        printf("process %d terminated\n", pid);
         printf("freeing resources\n");
 
         time++;
